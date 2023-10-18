@@ -10,6 +10,8 @@ import { HeaderComponent } from "./common/header/header.component";
 import { MenuComponent } from "./common/menu/menu.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EncyclopediaComponent } from "./encyclopedia/encyclopedia.component";
+import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
+import { EntryComponent } from './encyclopedia/entry/entry.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import { EncyclopediaComponent } from "./encyclopedia/encyclopedia.component";
         EncyclopediaComponent,
         MenuComponent,
         FooterComponent,
-        HeaderComponent
+        HeaderComponent,
+        BreadcrumbComponent,
+        EntryComponent
     ],
     imports: [
         BrowserModule,

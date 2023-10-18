@@ -1,0 +1,10 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li *ngIf="hasBreadcrumb()" class="breadcrumb-item"><a href="/">Home</a></li>
+    <li *ngIf="!hasBreadcrumb()" class="breadcrumb-item active" aria-current="page"><a href="/">Home</a></li>
+    <ng-container *ngFor="let crumb of getBreadcrumb(); last as isLast">
+      <li *ngIf="!isLast" class="breadcrumb-item"><a [href]="getCurrentUrl(crumb)">{{crumb}}</a></li>
+      <li *ngIf="isLast" class="breadcrumb-item active" aria-current="page">{{crumb}}</li>
+    </ng-container>
+  </ol>
+</nav>

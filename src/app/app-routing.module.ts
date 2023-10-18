@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AboutUsComponent } from "./about-us/about-us.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EncyclopediaComponent } from "./encyclopedia/encyclopedia.component";
+import { EntryComponent } from "./encyclopedia/entry/entry.component";
 
 const routes: Routes = [{
     path: "",
@@ -12,6 +13,10 @@ const routes: Routes = [{
 {
     path: "poke",
     component: EncyclopediaComponent,
+},
+{
+    path: "poke/:pokemon",
+    component: EntryComponent
 },
 {
     path: "about",
