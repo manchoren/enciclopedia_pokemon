@@ -1,1 +1,20 @@
-<p>dashboard works!</p>
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="display-3">Bienvenido a la enciclopedia Pokemon</h1>
+    <p>Esta es una aplicacion de prueba para mostrar las capacidades de Angular, unit testing y accesibilidad web.
+    </p>
+  </div>
+  <div class="col-sm-12">
+    <h3>Pokemones del momento:</h3>
+  </div>
+  <div *ngFor="let poke of pokemonsOfTheDay" class="col-sm-4 p-4">
+    <div class="card">
+      <a [routerLink]="'poke/'+ poke.id">
+      <img class="card-img-top" [src]="getDreamworkSprite(poke.id)" [alt]="poke.name + ' image'">
+      <div class="card-body">
+        <h5>{{ poke.name }}</h5>
+      </div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -68,7 +68,8 @@
               "browserTarget": "enciclopedia_pokemon:build:production"
             },
             "development": {
-              "browserTarget": "enciclopedia_pokemon:build:development"
+              "browserTarget": "enciclopedia_pokemon:build:development",
+              "proxyConfig": "proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"

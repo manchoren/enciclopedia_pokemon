@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { Link } from "src/app/models/links";
+import { Link } from "src/app/models";
 
 @Component({
     selector: "app-menu",
