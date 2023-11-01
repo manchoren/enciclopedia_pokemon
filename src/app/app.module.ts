@@ -2,6 +2,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 import { AboutUsComponent } from "./about-us/about-us.component";
 import { AppComponent } from "./app.component";
@@ -30,7 +31,8 @@ import { EntryComponent } from "./encyclopedia/entry/entry.component";
         BrowserModule,
         AppRoutingModule,
         NgbModule,
-        HttpClientModule
+        HttpClientModule,
+        InfiniteScrollModule
     ],
     providers: [],
     bootstrap: [AppComponent]

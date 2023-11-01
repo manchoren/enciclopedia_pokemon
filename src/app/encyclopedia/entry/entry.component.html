@@ -1,1 +1,13 @@
-<p>entry works!</p>
+<h1>{{poke?.name}}</h1>
+<div class="row">
+  <div class="col-sm-6">
+    <img class="card-img-top" [src]="getSprite(poke?.id)" [alt]="poke?.name + ' image'">
+  </div>
+  <div class="col-sm-6">
+    <strong>Altura</strong>: {{poke?.height}} cm<br/>
+    <strong>Peso</strong>: {{poke?.weight}} lb<br/>
+    <strong>Tipos</strong>: <span *ngFor="let type of poke?.types">{{type.type.name}} </span><br/>
+    <strong>habilidades</strong>: <span *ngFor="let ability of poke?.abilities">{{ability.ability.name}} </span><br/>
+    <span *ngFor="let stat of poke?.stats"><strong>{{stat.stat.name}}</strong>:  {{stat.base_stat}}<br/></span><br/>
+  </div>
+</div>

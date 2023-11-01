@@ -1,14 +1,16 @@
 import { HttpClient } from "@angular/common/http";
-import { EventEmitter, Injectable, Output } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 
 import { environment } from "../../environments/enviroment";
-import { PokeApiList } from "../models";
+import { PokeApiList, Pokemon } from "../models";
 
 @Injectable({
     providedIn: "root"
 })
 export class ApiService {
-    @Output() loading: EventEmitter<boolean> = new EventEmitter();
+    loading = new Subject<boolean>();
+
     constructor(private http: HttpClient) {}
 
     getDashboard(count = 3) {
@@ -20,16 +22,30 @@ export class ApiService {
         return this.doCall<PokeApiList>("pokemon", paramsRequest);
     }
 
-    private doCall<T>(path: string, paramsRequest: any) {
-        this.loading.emit(true);
+    getPokes(offset: number, limit: number) {
+        const paramsRequest = {
+            offset,
+            limit,
+        };
 
-        const obs = this.http.get<T>(
-            `${environment.ApiUrl}/${path}`,
-            { params: paramsRequest }
-        );
+        return this.doCall<PokeApiList>("pokemon", paramsRequest, false);
+    }
 
-        obs.subscribe(() => {
-            this.loading.emit(false);
+    getPoke(id: number | string) {
+        return this.doCall<Pokemon>(`pokemon/${id}`, {});
+    }
+
+    private doCall<T>(path: string, paramsRequest: any, loadingVisible = true) {
+        if (loadingVisible) { this.loading.next(true); }
+
+        const obs: Observable<T> = new Observable((subscriber) => {
+            this.http.get<T>(
+                `${environment.ApiUrl}/${path}`,
+                { params: paramsRequest }
+            ).subscribe((data:T) => {
+                this.loading.next(false);
+                subscriber.next(data);
+            });
         });
 
         return obs;

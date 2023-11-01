@@ -10,7 +10,7 @@
   <div *ngFor="let poke of pokemonsOfTheDay" class="col-sm-4 p-4">
     <div class="card">
       <a [routerLink]="'poke/'+ poke.id">
-      <img class="card-img-top" [src]="getDreamworkSprite(poke.id)" [alt]="poke.name + ' image'">
+      <img class="card-img-top" [src]="getOfficialArtwork(poke.id)" [alt]="poke.name + ' image'">
       <div class="card-body">
         <h5>{{ poke.name }}</h5>
       </div>

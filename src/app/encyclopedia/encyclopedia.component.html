@@ -1,1 +1,21 @@
-<p>encyclopedia works!</p>
+<div
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()"
+      class="row"
+    >
+    <div *ngFor="let poke of pokemons" class="col-sm-2 p-4">
+      <div class="card">
+        <a [routerLink]="poke.id.toString()">
+        <img class="card-img-top" [src]="getSprite(poke.id)" [alt]="poke.name + ' image'">
+        <div class="card-body">
+          <p><strong>{{ poke.name }}</strong></p>
+        </div>
+        </a>
+      </div>
+    </div>
+
+
+  </div>
+
