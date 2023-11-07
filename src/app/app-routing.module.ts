@@ -5,6 +5,7 @@ import { AboutUsComponent } from "./about-us/about-us.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EncyclopediaComponent } from "./encyclopedia/encyclopedia.component";
 import { EntryComponent } from "./encyclopedia/entry/entry.component";
+import { NotfoundComponent } from "./notfound/notfound.component";
 
 const routes: Routes = [{
     path: "",
@@ -15,6 +16,10 @@ const routes: Routes = [{
     component: EncyclopediaComponent,
 },
 {
+    path: "poke/not-found",
+    component: NotfoundComponent,
+},
+{
     path: "poke/:pokemon",
     component: EntryComponent
 },
@@ -22,7 +27,7 @@ const routes: Routes = [{
     path: "about",
     component: AboutUsComponent,
 },
-
+{ path: "**", redirectTo: "" },
 ];
 
 @NgModule({

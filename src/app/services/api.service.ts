@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 
@@ -42,10 +42,18 @@ export class ApiService {
             this.http.get<T>(
                 `${environment.ApiUrl}/${path}`,
                 { params: paramsRequest }
-            ).subscribe((data:T) => {
-                this.loading.next(false);
-                subscriber.next(data);
-            });
+            ).subscribe(
+                {
+                    next: (data:T) => {
+                        this.loading.next(false);
+                        subscriber.next(data);
+                    },
+                    error: (err: HttpErrorResponse) => {
+                        this.loading.next(false);
+                        subscriber.error(err);
+                    }
+                }
+            );
         });
 
         return obs;

@@ -1,5 +1,7 @@
+import { Location } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
@@ -14,6 +16,8 @@ import { MenuComponent } from "./common/menu/menu.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EncyclopediaComponent } from "./encyclopedia/encyclopedia.component";
 import { EntryComponent } from "./encyclopedia/entry/entry.component";
+import { SearchComponent } from "./encyclopedia/search/search.component";
+import { NotfoundComponent } from "./notfound/notfound.component";
 
 @NgModule({
     declarations: [
@@ -25,16 +29,19 @@ import { EntryComponent } from "./encyclopedia/entry/entry.component";
         FooterComponent,
         HeaderComponent,
         BreadcrumbComponent,
-        EntryComponent
+        EntryComponent,
+        SearchComponent,
+        NotfoundComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         NgbModule,
         HttpClientModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        ReactiveFormsModule
     ],
-    providers: [],
+    providers: [Location],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
+import { Location } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Pokemon } from "src/app/models";
 import { ApiService } from "src/app/services/api.service";
@@ -11,8 +12,13 @@ import { ApiService } from "src/app/services/api.service";
 })
 export class EntryComponent implements OnInit, OnDestroy {
     subscription: Subscription = new Subscription();
-    poke:Pokemon | undefined;
-    constructor(private api: ApiService, private route: ActivatedRoute) {}
+    poke: Pokemon | undefined;
+    constructor(
+        private api: ApiService,
+        private route: ActivatedRoute,
+        public router: Router,
+        private location: Location
+    ) {}
 
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get("pokemon");
@@ -26,6 +32,10 @@ export class EntryComponent implements OnInit, OnDestroy {
                 this.poke = res;
             },
             error: (error) => {
+                if (error.status === 404) {
+                    this.router.navigate(["/poke", "not-found"]);
+                }
+
                 throw error;
             }
         });
@@ -34,6 +44,10 @@ export class EntryComponent implements OnInit, OnDestroy {
     getSprite(id: number | undefined) {
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/"
     + `pokemon/other/home/${id}.png`;
+    }
+
+    goBack() {
+        (this.location as any).back();
     }
 
     ngOnDestroy(): void {
