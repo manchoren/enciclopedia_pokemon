@@ -2,3 +2,11 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+:focus {
+  /* Apply styles to the focused element */
+  outline: 2px solid blue;
+}
+
+/* Fix so we can center vertically*/
+html, body, app-root { height: 100% !important;}

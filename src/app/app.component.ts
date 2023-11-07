@@ -33,7 +33,12 @@ export class AppComponent implements OnDestroy, OnInit {
         this.subscription.unsubscribe();
     }
 
+    removeFragment(url: string): string {
+        const fragmentIndex = url.indexOf("#");
+        return fragmentIndex !== -1 ? url.substring(0, fragmentIndex) : url;
+    }
+
     showBreadCrumb(): boolean {
-        return this.router.url !== "/";
+        return this.removeFragment(this.router.url) !== "/";
     }
 }

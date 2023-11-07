@@ -13,7 +13,19 @@ export class BreadcrumbComponent {
 
     getBreadcrumb(): string[] {
         const path = this.router.url.split("/");
-        return path.filter((p) => p !== "");
+        const filteredPath = path.filter((p) => p !== "");
+
+        // Remove fragment from the last element
+        const lastElement = filteredPath.pop();
+        const fragmentIndex = lastElement?.indexOf("#");
+
+        if (lastElement && fragmentIndex !== undefined && fragmentIndex > -1) {
+            filteredPath.push(lastElement.substring(0, fragmentIndex));
+        } else if (lastElement) {
+            filteredPath.push(lastElement);
+        }
+
+        return filteredPath.filter((p) => p !== "");
     }
     hasBreadcrumb(): boolean {
         const breadcrumb = this.getBreadcrumb();

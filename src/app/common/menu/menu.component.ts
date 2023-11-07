@@ -15,4 +15,8 @@ export class MenuComponent {
     ];
 
     constructor(public router: Router) {}
+
+    skipToMain(): void {
+        document.getElementById("main-content")?.focus();
+    }
 }

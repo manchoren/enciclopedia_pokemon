@@ -1,3 +1,4 @@
+<button type="button" (click)="skipToMain()" class="skip-link">Ir directo al contenido</button>
 <ul ngbNav [activeId]="router.url" class="nav-pills flex-column" orientation="vertical">
   <li [ngbNavItem]="link.url" *ngFor="let link of links">
     <a ngbNavLink [routerLink]="link.url">{{ link.title }}</a>

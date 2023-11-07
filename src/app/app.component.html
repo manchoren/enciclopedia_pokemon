@@ -10,7 +10,9 @@
       </div>
     <div class="col-sm-10">
       <app-breadcrumb *ngIf="showBreadCrumb()"></app-breadcrumb>
-      <router-outlet></router-outlet>
+      <main id="main-content" tabindex="-1"> <!-- tabindex is used to avoid an chrome bug, see https://bugs.chromium.org/p/chromium/issues/detail?id=454172#c22. Is marked al fixed however still fails -->
+        <router-outlet></router-outlet>
+      </main>
     </div>
   </div>
   <div class="row">
@@ -19,6 +21,6 @@
     </div>
   </div>
 </div>
-<div class="container" [hidden]="!loading">
-    <img src="/assets/pikachuLoading.gif" class="mx-auto img-fluid" />
+<div class="container d-flex align-items-center justify-content-center h-100" *ngIf="loading">
+    <img src="/assets/pikachuLoading.gif" class="mx-auto d-block" />
 </div>
