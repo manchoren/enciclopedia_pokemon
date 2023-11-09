@@ -1,3 +1,5 @@
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { EncyclopediaComponent } from "./encyclopedia.component";
@@ -8,7 +10,9 @@ describe("EncyclopediaComponent", () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [EncyclopediaComponent]
+            declarations: [EncyclopediaComponent],
+            imports: [HttpClientTestingModule],
+            schemas: [NO_ERRORS_SCHEMA]
         });
         fixture = TestBed.createComponent(EncyclopediaComponent);
         component = fixture.componentInstance;
