@@ -1,4 +1,5 @@
 import { Location } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -13,6 +14,8 @@ import { ApiService } from "src/app/services/api.service";
 export class EntryComponent implements OnInit, OnDestroy {
     subscription: Subscription = new Subscription();
     poke: Pokemon | undefined;
+    errorMessage: string | undefined;
+
     constructor(
         private api: ApiService,
         private route: ActivatedRoute,
@@ -22,7 +25,6 @@ export class EntryComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get("pokemon");
-
         if (!id) {
             return;
         }
@@ -31,12 +33,12 @@ export class EntryComponent implements OnInit, OnDestroy {
             next: (res: Pokemon) => {
                 this.poke = res;
             },
-            error: (error) => {
+            error: (error: HttpErrorResponse) => {
                 if (error.status === 404) {
                     this.router.navigate(["/poke", "not-found"]);
                 }
 
-                throw error;
+                this.errorMessage = error.message;
             }
         });
     }

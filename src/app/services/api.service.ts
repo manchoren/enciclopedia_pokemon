@@ -32,10 +32,12 @@ export class ApiService {
     }
 
     getPoke(id: number | string) {
+        if (typeof id === "number" && id < 0) { throw new Error("invalid id"); }
+
         return this.doCall<Pokemon>(`pokemon/${id}`, {});
     }
 
-    private doCall<T>(path: string, paramsRequest: any, loadingVisible = true) {
+    doCall<T>(path: string, paramsRequest: any, loadingVisible = true) {
         if (loadingVisible) { this.loading.next(true); }
 
         const obs: Observable<T> = new Observable((subscriber) => {

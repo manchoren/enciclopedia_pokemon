@@ -11,7 +11,7 @@ export class SearchComponent {
     searchForm = new FormGroup({
         search: new FormControl("", [
             Validators.required,
-            Validators.pattern("^[0-9]*$"),
+            Validators.pattern(/^[0-9]+$/),
 
         ]),
     });
@@ -19,6 +19,7 @@ export class SearchComponent {
     constructor(public router: Router) {}
 
     onSubmit() {
+        if (!this.searchForm.get("search")?.valid) { return; }
         this.router.navigate(["/poke", this.searchForm.get("search")?.value]);
     }
 }

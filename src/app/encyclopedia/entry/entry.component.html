@@ -1,5 +1,6 @@
-<h1>{{poke?.name}}</h1>
-<div class="row">
+<div class="alert alert-danger m-t-4" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+<h1  *ngIf="!errorMessage">{{poke?.name}}</h1>
+<div *ngIf="!errorMessage" class="row">
   <div class="col-sm-6">
     <img class="card-img-top" [src]="getSprite(poke?.id)" [alt]="poke?.name + ' image'">
   </div>

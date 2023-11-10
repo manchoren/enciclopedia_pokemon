@@ -20,4 +20,44 @@ describe("SearchComponent", () => {
     it("should create", () => {
         expect(component).toBeTruthy();
     });
+
+    it("should navigate to the correct route with valid input", () => {
+        spyOn(component.router, "navigate");
+
+        component.searchForm.get("search")?.setValue("123");
+        component.onSubmit();
+
+        expect(component.router.navigate).toHaveBeenCalledWith(["/poke", "123"]);
+    });
+
+    it("should handle empty input correctly", () => {
+        spyOn(component.router, "navigate");
+
+        component.searchForm.get("search")?.setValue("");
+        component.onSubmit();
+
+        expect(component.router.navigate).not.toHaveBeenCalled();
+    });
+
+    it("EDGE CASE: should handle input with leading/trailing spaces correctly", () => {
+        spyOn(component.router, "navigate");
+
+        component.searchForm.get("search")?.setValue(" 123 ");
+        component.onSubmit();
+
+        expect(component.router.navigate).not.toHaveBeenCalled();
+    });
+
+    it("EDGE CASE: should handle input with non-numeric characters correctly", () => {
+        spyOn(component.router, "navigate");
+
+        component.searchForm.get("search")?.setValue("abc");
+        component.onSubmit();
+
+        expect(component.router.navigate).not.toHaveBeenCalled();
+    });
+
+    afterAll(() => {
+        TestBed.resetTestingModule();
+    });
 });

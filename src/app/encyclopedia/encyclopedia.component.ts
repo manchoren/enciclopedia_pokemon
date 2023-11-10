@@ -14,6 +14,7 @@ import { getPokemonIdFromUrl } from "../utils";
 })
 export class EncyclopediaComponent implements OnInit, OnDestroy {
     pokemons:PokemonList[] = [];
+    errorMessage: string | undefined;
     subscription: Subscription = new Subscription();
     limit = 30;
     offset = 0;
@@ -29,12 +30,12 @@ export class EncyclopediaComponent implements OnInit, OnDestroy {
         this.subscription = this.api.getPokes(offset, limit).subscribe({
             next: (res: PokeApiList) => {
                 if (!res.results.length) {
-                    throw new Error("No hay mas pokemons");
+                    this.errorMessage = "No hay mas pokemons";
                 }
                 res.results.map((pk) => this.pokemons.push({ name: pk.name, id: getPokemonIdFromUrl(pk.url) }));
             },
-            error: (error) => {
-                throw error;
+            error: (error: Error) => {
+                this.errorMessage = error.message;
             }
         });
     }
